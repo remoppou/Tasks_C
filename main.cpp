@@ -10,19 +10,19 @@ int main() {
     std::string function3 = "sin(x)";
     std::cout << "Enter x=  ";
     std::cin >> x;
-    std::cout << "Choose function(Enter num):" << '\n' << "1. x^2" << '\n' << "2. e^x" << '\n' << "3. sin(x)" << '\n';
+    std::cout << "Choose function(Enter num):" << '\n' << "1. "<< function1 << '\n' << "2. "<< function2 << '\n' << "3. "<< function3 << '\n';
     std::cin >> num;
     switch (num) {
         case 1:
-            function = "x^2";
+            function = function1;
             funAns = pow(x,2);
             break;
         case 2:
-            function = "e^x";
+            function = function2;
             funAns = exp(x);
             break;
         case 3:
-            function = "sin(x)";
+            function = function3;
             funAns = sin(x);
             break;
         default: throw -1;

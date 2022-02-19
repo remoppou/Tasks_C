@@ -25,7 +25,9 @@ int main() {
             function = function3;
             funAns = sin(x);
             break;
-        default: throw -1;
+        default:
+            std::cout << "Incorrect interval entered" << '\n';
+            return 0;
     }
     std::cout << "Entered  f(x) =  " << function << '\n';
     std::cout << "Answer  f(x) =  " << funAns << '\n';

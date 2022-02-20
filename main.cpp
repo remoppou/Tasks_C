@@ -1,17 +1,18 @@
 #include <iostream>
 #include <valarray>
+using namespace std;
 
 int main() {
     double x; double y; int num;
     double funAns;
-    std::string function;
-    std::string function1 = "x^2";
-    std::string function2 = "e^x";
-    std::string function3 = "sin(x)";
-    std::cout << "Enter x=  ";
-    std::cin >> x;
-    std::cout << "Choose function(Enter num):" << '\n' << "1. "<< function1 << '\n' << "2. "<< function2 << '\n' << "3. "<< function3 << '\n';
-    std::cin >> num;
+    string function;
+    string function1 = "x^2";
+    string function2 = "e^x";
+    string function3 = "sin(x)";
+    cout << "Enter x=  ";
+    cin >> x;
+    cout << "Choose function(Enter num):" << '\n' << "1. "<< function1 << '\n' << "2. "<< function2 << '\n' << "3. "<< function3 << '\n';
+    cin >> num;
     switch (num) {
         case 1:
             function = function1;
@@ -26,16 +27,16 @@ int main() {
             funAns = sin(x);
             break;
         default:
-            std::cout << "Incorrect interval entered" << '\n';
+            cout << "Incorrect interval entered" << '\n';
             return 0;
     }
-    std::cout << "Entered  f(x) =  " << function << '\n';
-    std::cout << "Answer  f(x) =  " << funAns << '\n';
+    cout << "Entered  f(x) =  " << function << '\n';
+    cout << "Answer  f(x) =  " << funAns << '\n';
     if (x > 0) {
         y = log(x) + pow(funAns,3);
     } else {
         y = 0.5 * sqrt(abs(funAns)) + sin(x);
     }
-    std::cout << "Answer = " << y;
+    cout << "Answer = " << y;
     return 0;
 }

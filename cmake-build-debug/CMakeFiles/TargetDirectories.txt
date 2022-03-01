@@ -1,0 +1,3 @@
+D:/C++Projects/C_Task2_var7-master/cmake-build-debug/CMakeFiles/Task2_var7.dir
+D:/C++Projects/C_Task2_var7-master/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/C++Projects/C_Task2_var7-master/cmake-build-debug/CMakeFiles/rebuild_cache.dir

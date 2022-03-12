@@ -10,6 +10,30 @@ using namespace std;
 //Например, вывести список всех экспонатов второго зала. Формы запросов
 //придумать самостоятельно.
 
+struct museum{
+    const char *nameMuseum;
+    float coast; //price
+    int timeOfWork[2];//1-open;2-close
+    const char *adress;
+    struct workers{
+        char name;
+        int age;
+        int
+    };
+    struct halls{
+        struct exhibits{};
+    };
+    struct excursions{};
+};
+
+
 int main() {
+    museum mus[1];
+    mus[0].nameMuseum = "Voronezh Museum";
+    mus[0].coast = 100;
+    mus[0].timeOfWork[0] = 8;
+    mus[0].timeOfWork[1] = 14;
+    mus[0].adress = "Plekhanovskaya str., 29";
+
     return 0;
 }

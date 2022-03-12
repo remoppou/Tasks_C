@@ -30,13 +30,13 @@ struct museum{
 
 
 int main() {
-    museum mus[1];
+    museum mus;
     //info about museum
-    mus[0].nameMuseum = "Voronezh Museum";
-    mus[0].coast = 100;
-    mus[0].timeOfWork[0] = 8;
-    mus[0].timeOfWork[1] = 14;
-    mus[0].adress = "Plekhanovskaya str., 29";
+    mus.nameMuseum = "Voronezh Museum";
+    mus.coast = 100;
+    mus.timeOfWork[0] = 8;
+    mus.timeOfWork[1] = 14;
+    mus.adress = "Plekhanovskaya str., 29";
     //workers
 
     return 0;

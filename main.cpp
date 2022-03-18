@@ -16,16 +16,19 @@ struct museum{
     int timeOfWork[2];//1-open;2-close
     const char *adress;
     struct workers{
-        char name;
+        const char *name;
         int age;
     };
+    workers workers[5];
     struct halls{
         struct exhibits{};
     };
+    halls halls[3];
     struct excursions{
         const char *nameOfExc;
         float price;
     };
+    excursions excursions[2];
 };
 
 
@@ -38,6 +41,22 @@ int main() {
     mus.timeOfWork[1] = 14;
     mus.adress = "Plekhanovskaya str., 29";
     //workers
+    mus.workers[0].name = "Evgeny";
+    mus.workers[1].name = "Olga";
+    mus.workers[2].name = "Arseniy";
+    mus.workers[3].name = "Vladimir";
+    mus.workers[4].name = "Max";
+    mus.workers[0].age = 25;
+    mus.workers[1].age = 30;
+    mus.workers[2].age = 48;
+    mus.workers[3].age = 57;
+    mus.workers[4].age = 29;
+    //halls
 
+    //excursion
+    mus.excursions[0].nameOfExc = "History";
+    mus.excursions[0].price = 100;
+    mus.excursions[1].nameOfExc = "OtherName";
+    mus.excursions[1].price = 400;
     return 0;
 }

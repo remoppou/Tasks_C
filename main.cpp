@@ -21,7 +21,11 @@ struct museum{
     };
     workers workers[5];
     struct halls{
-        struct exhibits{};
+        struct exhibits{
+            const char *nameEx;
+            int age;
+            int hall;
+        };
     };
     halls halls[3];
     struct excursions{

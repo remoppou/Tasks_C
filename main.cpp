@@ -52,7 +52,6 @@ struct museum{
 };
 
 museum mus;
-fstream in("D:\\C++Projects\\C_Task4_var10\\input.txt");
 
 void addExp(int hall, string name, int age) {
     switch (hall) {
@@ -77,15 +76,28 @@ void addExp(int hall, string name, int age) {
     }
     string str = name + " " + to_string(age) + " " + to_string(hall);
     fstream file("D:\\C++Projects\\C_Task4_var10\\input.txt", std::ios::out | std::ios::app);
-    file << str;
+    file << '\n' << str;
     file.close();
 }
 
-void outputHall(int hall) {
+void outputHall(int hallNeed) {
+    int size = 0;
+    if (hallNeed == 1) {
+        size = firstHall;
+    }
+    if (hallNeed == 2) {
+        size = secHall;
+    }
+    if (hallNeed == 3) {
+        size = thirdHall;
+    }
+    for (int i = 0; i < size; i++) {
+        cout << mus.halls[hallNeed - 1].exhibits[i].nameEx << " " << mus.halls[hallNeed - 1].exhibits[i].age << " "
+        <<mus.halls[hallNeed - 1].exhibits[i].hall << endl;
+    }
 }
 
 int main() {
-
     //info about museum
     cout << "Info about museum \n";
     mus.nameMuseum = "Voronezh Museum";
@@ -114,6 +126,7 @@ int main() {
     cout << "Info about halls \n";
     //halls
     string str;
+    ifstream in("D:\\C++Projects\\C_Task4_var10\\input.txt");
     if(!in.is_open()) {
         cout << "Error of open input.txt" << endl;
     } else {
@@ -162,11 +175,29 @@ int main() {
         }
     }
     in.close();
+    cout << "Hall 1: \n";
+    outputHall(1);
     cout << "\n";
+    cout << "Hall 2: \n";
+    outputHall(2);
+    cout << "\n";
+    cout << "Hall 3: \n";
+    outputHall(3);
+    cout << "\n";
+    cout << "Halls with new Ex: \n";
     //addNewEx
     addExp(2, "Pushkin", 100);
+    addExp(3, "Roman", 300);
     //getHalls
-
+    cout << "Hall 1: \n";
+    outputHall(1);
+    cout << "\n";
+    cout << "Hall 2: \n";
+    outputHall(2);
+    cout << "\n";
+    cout << "Hall 3: \n";
+    outputHall(3);
+    cout << "\n";
     //excursion
     cout << "Info about excursions \n";
     mus.excursions[0].nameOfExc = "History";

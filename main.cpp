@@ -11,9 +11,23 @@ using namespace std;
 //Например, вывести список всех экспонатов второго зала. Формы запросов
 //придумать самостоятельно.
 
+////param input /*
+/*
+First 200 2
+Sec 154 1
+Third 30 3
+*/
+
+int firstHall = 0;
+int secHall = 0;
+int thirdHall = 0;
+
 struct museum{
     char *nameMuseum;
     float coast; //price
+    enum workDays {
+        Monday, Tuesday, Thursday, Friday, Saturday
+    };
     int timeOfWork[2];//1-open;2-close
     const char *adress;
     struct workers{
@@ -27,7 +41,7 @@ struct museum{
             int age;
             int hall;
         };
-        exhibits exhibits;
+        exhibits exhibits[3];
     };
     halls halls[3];
     struct excursions{
@@ -37,9 +51,37 @@ struct museum{
     excursions excursions[2];
 };
 
+museum mus;
+ifstream in("D:\\C++Projects\\C_Task4_var10\\input.txt");
+
+void addExp(int hall, string name, int age) {
+    switch (hall) {
+        case 1:
+            mus.halls[0].exhibits[firstHall].nameEx = name;
+            mus.halls[0].exhibits[firstHall].age = age;
+            mus.halls[0].exhibits[firstHall].hall = hall;
+            firstHall++;
+            break;
+        case 2 :
+            mus.halls[1].exhibits[secHall].nameEx = name;
+            mus.halls[1].exhibits[secHall].age = age;
+            mus.halls[1].exhibits[secHall].hall = hall;
+            secHall++;
+            break;
+        case 3 :
+            mus.halls[2].exhibits[thirdHall].nameEx = name;
+            mus.halls[2].exhibits[thirdHall].age = age;
+            mus.halls[2].exhibits[thirdHall].hall = hall;
+            thirdHall++;
+            break;
+    }
+}
+
+void outputHall(int hall) {
+}
 
 int main() {
-    museum mus;
+
     //info about museum
     cout << "Info about museum \n";
     mus.nameMuseum = "Voronezh Museum";
@@ -68,32 +110,56 @@ int main() {
     cout << "Info about halls \n";
     //halls
     string str;
-    int size = 0;
-    ifstream in("D:\\C++Projects\\C_Task4_var10\\input.txt");
     if(!in.is_open()) {
         cout << "Error of open input.txt" << endl;
     } else {
-        int i = 0;
         while (!in.eof()) {
+            int i = 0;
             string a;
             int age;
             int hall;
             getline(in , str);
-            in >> a >> age >> hall;
+            for (int s = 0; s < 3; s++) {
+                string word;
+                while (str[i] != ' ' && i < str.length()) {
+                    word += str[i];
+                    i++;
+                }
+                i++;
+                if (s == 0) {
+                    a = word;
+                } else if (s == 1) {
+                    age = stoi(word);
+                } else if (s == 2) {
+                    hall = stoi(word);
+                }
+                word = "";
+            }
             switch (hall) {
                 case 1:
-                    in >> mus.halls[0].exhibits.nameEx >> mus.halls[0].exhibits.age >> mus.halls[0].exhibits.age;
+                    mus.halls[0].exhibits[firstHall].nameEx = a;
+                    mus.halls[0].exhibits[firstHall].age = age;
+                    mus.halls[0].exhibits[firstHall].hall = hall;
+                    firstHall++;
+                    break;
                 case 2 :
-                    in >> mus.halls[1].exhibits.nameEx >> mus.halls[1].exhibits.age >> mus.halls[1].exhibits.hall;
+                    mus.halls[1].exhibits[secHall].nameEx = a;
+                    mus.halls[1].exhibits[secHall].age = age;
+                    mus.halls[1].exhibits[secHall].hall = hall;
+                    secHall++;
+                    break;
                 case 3 :
-                    in >> mus.halls[2].exhibits.nameEx >> mus.halls[2].exhibits.age >> mus.halls[2].exhibits.hall;
+                    mus.halls[2].exhibits[thirdHall].nameEx = a;
+                    mus.halls[2].exhibits[thirdHall].age = age;
+                    mus.halls[2].exhibits[thirdHall].hall = hall;
+                    thirdHall++;
+                    break;
             }
-            i++;
-            size++;
         }
     }
     in.close();
     cout << "\n";
+    //addNewEx
     //excursion
     cout << "Info about excursions \n";
     mus.excursions[0].nameOfExc = "History";

@@ -52,7 +52,7 @@ struct museum{
 };
 
 museum mus;
-ifstream in("D:\\C++Projects\\C_Task4_var10\\input.txt");
+fstream in("D:\\C++Projects\\C_Task4_var10\\input.txt");
 
 void addExp(int hall, string name, int age) {
     switch (hall) {
@@ -75,6 +75,10 @@ void addExp(int hall, string name, int age) {
             thirdHall++;
             break;
     }
+    string str = name + " " + to_string(age) + " " + to_string(hall);
+    fstream file("D:\\C++Projects\\C_Task4_var10\\input.txt", std::ios::out | std::ios::app);
+    file << str;
+    file.close();
 }
 
 void outputHall(int hall) {
@@ -160,6 +164,9 @@ int main() {
     in.close();
     cout << "\n";
     //addNewEx
+    addExp(2, "Pushkin", 100);
+    //getHalls
+
     //excursion
     cout << "Info about excursions \n";
     mus.excursions[0].nameOfExc = "History";

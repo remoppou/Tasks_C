@@ -1,4 +1,4 @@
-# Install script for directory: D:/C++Projects/Task5_Var1
+# Install script for directory: D:/CProjects/C_Task5_var1
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/C++Projects/Task5_Var1/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/CProjects/C_Task5_var1/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

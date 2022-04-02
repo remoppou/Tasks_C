@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/C++Projects/Task5_Var1/cmake-build-debug",
-		"source" : "D:/C++Projects/Task5_Var1"
+		"build" : "D:/CProjects/C_Task5_var1/cmake-build-debug",
+		"source" : "D:/CProjects/C_Task5_var1"
 	},
 	"version" : 
 	{

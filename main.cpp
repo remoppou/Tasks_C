@@ -76,38 +76,42 @@ public:
     }
 };
 
-Set operator- (Set &left, Set& right) {
-    Set out(left.getSize());
+void operator- (Set left, Set right) {
     int helpCalk = 0;
-    int calkElement = 0;
-    for (int i = 0; i < left.getSize(); i++) {
-        for (int j = 0; j < right.getSize(); j++){
-            if (left.getElement(i) == left.getElement(j)) {
+    int firstSize = left.getSize();
+    int secSize = right.getSize();
+    Set out(firstSize);
+    for (int i = 0; i < firstSize; i++) {
+        int num1 = left.getElement(i);
+        for (int j = 0; j < secSize; j++){
+            if (num1 == right.getElement(j)) {
                 helpCalk++;
             }
         }
         if (helpCalk == 0) {
-            out.add(left.getElement(i));
-            calkElement++;
+            out.add(num1);
         }
         helpCalk = 0;
     }
-    Set outTrue(calkElement);
-    for (int i = 0; i < calkElement; i++) {
-        outTrue.add(out.getElement(i));
-    }
-    return outTrue;
-}
-
-void outputForMinus(Set outTrue) {
-    for (int i = 0; i < outTrue.getSize(); i++) {
-        if (i == outTrue.getSize() - 1) {
-            cout << outTrue.getElement(i) << "." << endl;
+    for (int i = 0; i < out.getSize(); i++) {
+        if (i == out.getSize() - 1) {
+            cout << out.getElement(i) << "." << endl;
         } else {
-            cout << outTrue.getElement(i)  << ", ";
+            cout << out.getElement(i)  << ", ";
         }
     }
 }
+
+//Функция, которая должна была выводить перегрузку разности
+//void outputForMinus(Set outTrue) {
+//    for (int i = 0; i < outTrue.getSize(); i++) {
+//        if (i == outTrue.getSize() - 1) {
+//            cout << outTrue.getElement(i) << "." << endl;
+//        } else {
+//            cout << outTrue.getElement(i)  << ", ";
+//        }
+//    }
+//}
 
 void friendFunction(Set& set1, Set& set2) {
     cout << "Size first set: " << set1.numElements << "(You can add: " << set1.sizeArray << ")" << "; Size second set: " << set2.numElements << "(You can add: " << set2.sizeArray << ")."<< endl;
@@ -223,7 +227,7 @@ int main() {
                 intersection(&set1, &set2);
                 break;
             case 5:
-                outputForMinus(set1 - set2);
+                set1 - set2;
                 break;
             case 6:  //Output(work)
                 cout << "Choose set (1 or 2) :";

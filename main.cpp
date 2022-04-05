@@ -70,13 +70,17 @@ public:
         }
     }
 
-    Set operator- (Set set);
+    friend Set operator- (const Set &set1, const Set &set2);
 
     ~Set() {
         delete[] array;
         sizeArray = 0;
     }
 };
+
+Set operator- (const Set &set1, const Set &set2) {
+    return Set(set1 - set2);
+}
 
 void intersection(Set* set1, Set* set2) {
     int size1;
@@ -188,7 +192,7 @@ int main() {
                 intersection(&set1, &set2);
                 break;
             case 5:
-                //Перегрузка оператора разность
+                set1-set2;
                 break;
             case 6:  //Output(work)
                 cout << "Choose set (1 or 2) :";

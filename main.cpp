@@ -11,7 +11,7 @@ using namespace std;
         демонстрирующую работу шаблонных классов с различными типами
         данных. */
 
-template<class T> class Set {
+template<class T> class Set{
 private:
     T *array;
     int sizeArray;
@@ -72,10 +72,10 @@ public:
         }
     }
 
-     ~Set() {
-        delete[] array;
-        sizeArray = 0;
-    }
+//    ~Set() {
+//        delete[] array;
+//        sizeArray = 0;
+//    }
 };
 
 template<typename T> void operator- (Set<T> left, Set<T> right) {
@@ -104,23 +104,23 @@ template<typename T> void operator- (Set<T> left, Set<T> right) {
     }
 }
 
-template <typename T> void intersection(Set<T>* set1, Set<T>* set2) {
+template <typename T> void intersection(Set<T> set1, Set<T> set2) {
     int size1;
     int size2;
     int trueSize;
     int calk = 0;
-    size1 = set1->getSize();
-    size2 = set2->getSize();
+    size1 = set1.getSize();
+    size2 = set2.getSize();
     if (size1 <= size2) {
         trueSize = size1;
     } else {
         trueSize = size2;
     }
-    int* array = new int [trueSize];
+    T* array = new T [trueSize];
     for (int i = 0; i < size1; i++) {
         for (int j = 0; j < size2 ; j++) {
-            if (set1->getElement(i) == set2->getElement(j)) {
-                array[calk] = set1->getElement(i);
+            if (set1.getElement(i) == set2.getElement(j)) {
+                array[calk] = set1.getElement(i);
                 calk++;
                 break;
             }
@@ -179,12 +179,14 @@ int main() {
     setDouble2.add(5.5);
     setDouble2.add(44.44);
     setDouble2.add(33.76);
-    setDouble1.output();
-    setDouble2.output();
+    cout << "Set 1: ";setDouble1.output();
+    cout << "Set 2: ";setDouble2.output();
     setDouble2.change(4.4, 0);
-    setDouble2.output();
+    cout << "After change in set2 0 index: ";setDouble2.output();
     setDouble2.remove(2);
-    setDouble2.output();
-    setDouble1 - setDouble2;
+    cout << "Remove 2 index: ";setDouble2.output();
+    cout << "Operator -: ";setDouble1 - setDouble2;
+    cout << "Intersection INT: " ;intersection(setInt1, setInt2);
+    cout << "Intersection Double: ";intersection(setDouble1, setDouble2);
     return 0;
 }

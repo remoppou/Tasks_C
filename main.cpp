@@ -17,14 +17,17 @@ using namespace std;
 template<class T> class Set {
     private:
         list <T> set;
+        T min;
+        T max;
+        int size;
         typename list<T>::iterator it;
     public:
         Set() {
-            list <T> set;
+            size = 0;
         }
 
         int getSize() {
-            return set.size();
+            return size;
         }
 
         T getElement(int i) {
@@ -36,39 +39,63 @@ template<class T> class Set {
         };
 
         void add(T a) {
-            set.push_back(a);
-            set.unique();
-            set.sort();
+            if (size == 0) {
+                set.push_back(a);
+                min = a;
+                max = a;
+                size++;
+            } else {
+                if (a < min) {
+                    set.push_front(a);
+                    size++;
+                    min = a;
+                } else if (a > max) {
+                    set.push_back(a);
+                    size++;
+                    max = a;
+                } else if (a > min && a < max) {
+                    it = set.begin();
+                    while (*it < a) {
+                        it++;
+                    }
+                    if (*it != a) {
+                        set.insert(it, a);
+                        size++;
+                    }
+                }
+            }
         }
 
-        void remove(int index) {
-            if (index < 0 || index >= getSize()) {
-                cout << "Nothing remove" << endl;
+        void remove(T a) {
+            if (a < min || a > max) {
+                cout << "There are no this element!" << endl;
             } else {
-                int i=0;
                 it = set.begin();
-                while(i <= index) {
-                    if (i == index) {
+                while(*it <= a) {
+                    if (*it == a) {
                         set.remove(*it);
+                        size--;
                     }
                     it++;
-                    i++;
                 }
             }
         }
 
         void output () {
+            it = set.begin();
             for (int i = 0; i < getSize(); i++) {
                 if (i == getSize() - 1) {
-                    cout << getElement(i) << "." << endl;
+                    cout << *it << "." << endl;
                 } else {
-                    cout << getElement(i) << ", ";
+                    cout << *it << ", ";
                 }
+                *it++;
             }
         }
 
         ~Set() {
             set.clear();
+            size = 0;
         }
     };
 
@@ -89,13 +116,7 @@ template<typename T> void operator- (Set<T>& left, Set<T>& right) {
         }
         helpCalk = 0;
     }
-    for (int i = 0; i < out.getSize(); i++) {
-        if (i == out.getSize() - 1) {
-            cout << out.getElement(i) << "." << endl;
-        } else {
-            cout << out.getElement(i)  << ", ";
-        }
-    }
+    out.output();
 }
 
 template <typename T> void intersection(Set<T>& set1, Set<T>& set2) {
@@ -125,10 +146,12 @@ int main() {
     setInt1.add(2);
     setInt1.add(6);
     setInt1.add(6);
-    cout << "After 5 add: "; setInt1.output();
+    cout << "After 5 add(I wrote 2 six): "; setInt1.output();
     cout << "Size: " << setInt1.getSize() << endl;
-    setInt1.remove(3);
-    cout << "After remove 3 index: "; setInt1.output();
+    setInt1.remove(1);
+    cout << "After remove 1: "; setInt1.output();
+    setInt1.remove(6);
+    cout << "After remove 6: "; setInt1.output();
     setInt2.add(44);
     setInt2.add(2);
     cout << "Set2: "; setInt2.output();
@@ -147,7 +170,7 @@ int main() {
     cout << "Set1: "; setDouble1.output();
     cout << "Set2: "; setDouble2.output();
     setDouble2.remove(1);
-    cout << "After remove 1 index(set2): "; setDouble2.output();
+    cout << "After remove 1: "; setDouble2.output();
     cout << "Operator -: "; setDouble1 - setDouble2;
     cout << "Intersection: "; intersection(setDouble1, setDouble2);
     return 0;

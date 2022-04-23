@@ -26,14 +26,21 @@ template<class T> class Set {
             size = 0;
         }
 
-        int getSize() {
+        int getSize() const {
             return size;
         }
 
         T getElement(int i) {
-            it = set.begin();
-            for(int k = 0; k < i; k++){
-                ++it;
+            if (i <= size/2) {
+                it = set.begin();
+                for(int k = 0; k < i; k++){
+                    ++it;
+                }
+            } else {
+                it = set.end();
+                for(int k = size; k > i; k--){
+                    --it;
+                }
             }
             return *it;
         };

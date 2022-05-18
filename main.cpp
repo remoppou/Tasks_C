@@ -7,47 +7,45 @@
 
 using namespace std;
 
-void task1_var1() {
-    double x;
+/**
+ * Methods for 1 task;
+ * */
+void forFirstTask(double x, double funAns,string function) {
     double y;
+    cout << "Entered  f(x) =  " << function << '\n';
+    cout << "Answer  f(x) =  " << funAns << '\n';
+    if (x > 0) {
+        y = log(x) + funAns * funAns * funAns;
+    } else {
+        y = 0.5 * sqrt(abs(funAns)) + sin(x);
+    }
+    cout << "Answer = " << y << endl;
+}
+/**
+ * Methods for 1 task - end;
+ * */
+
+void task1_var1() { //A small transformation of the code
+    double x, funAns;
     int num;
-    double funAns;
-    bool last = true;
-    string function;
-    string function1 = "x^2";
-    string function2 = "e^x";
-    string function3 = "sin(x)";
-    cout << "Enter x=  ";
-    cin >> x;
-    cout << "Choose function(Enter num):" << '\n' << "1. " << function1 << '\n' << "2. " << function2 << '\n' << "3. "
-         << function3 << '\n';
+    string function, function1 = "x^2", function2("e^x"), function3{"sin(x)"}; //Unified initialization syntax
+    cout << "Enter x =  "; cin >> x;
+    cout << "Choose function(Enter num):" << '\n' << "1. " << function1 << '\n' << "2. " << function2 << '\n' << "3. " << function3 << '\n';
     cin >> num;
-    switch (num) {
-        case 1:
+    if (num < 1 || num > 3) {
+        cout << "Incorrect interval entered" << endl;
+    } else {
+        if (num == 1) {
             function = function1;
             funAns = x * x;
-            break;
-        case 2:
+        } else if (num == 2) {
             function = function2;
             funAns = exp(x);
-            break;
-        case 3:
+        } else {
             function = function3;
             funAns = sin(x);
-            break;
-        default:
-            cout << "Incorrect interval entered" << '\n';
-            last = false;
-    }
-    if (last) {
-        cout << "Entered  f(x) =  " << function << '\n';
-        cout << "Answer  f(x) =  " << funAns << '\n';
-        if (x > 0) {
-            y = log(x) + funAns * funAns * funAns;
-        } else {
-            y = 0.5 * sqrt(abs(funAns)) + sin(x);
         }
-        cout << "Answer = " << y << endl;
+        forFirstTask(x, funAns, function);
     }
 }
 
@@ -114,6 +112,7 @@ int determinant(double **arr, int m) {
             k = -k;
         }
     }
+    delete p;
     return d;
 }
 
@@ -152,6 +151,7 @@ void algDop(double **arr, int m) {
             }
         }
     }
+    delete p; delete z;
 }
 
 void transpose(double **arr, int size) {
@@ -177,21 +177,17 @@ void inverceMatrix(double **arr, int size, int det) {
  * Methods for 2 task - end;
  * */
 
-void task2_var7() {
+void task2_var7() { //Added several array cleanups
     int size;
-    // Размер
-    cout << "Enter size: " << '\n';
-    cin >> size;
-    //Создание матрицы
+    cout << "Enter size: "; cin >> size;
+    cout << '\n';
     double **array;
     array = new double *[size];
     for (int r = 0; r < size; r++) {
         array[r] = new double[size];
     }
     input(array, size);
-    //Подсчет определителя
     int det = determinant(array, size);
-    //Проверка определителя на 0
     if (det != 0) {
         cout << "det = " << det << "\n";
         if (size > 1) {
@@ -704,7 +700,6 @@ private:
     list<int>::iterator it;
 public:
     Set() {
-        list<int> set;
     }
 
     void add(int a) {

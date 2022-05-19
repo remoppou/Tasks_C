@@ -697,29 +697,68 @@ class Set {
 
 private:
     list<int> set;
+    int min;
+    int max;
+    int size;
     list<int>::iterator it;
 public:
     Set() {
+        size = 0;
     }
 
     void add(int a) {
-        set.push_back(a);
-        set.unique();
-        set.sort();
+        if (size == 0) {
+            set.push_back(a);
+            min = a;
+            max = a;
+            size++;
+        } else {
+            if (a < min) {
+                set.push_front(a);
+                size++;
+                min = a;
+            } else if (a > max) {
+                set.push_back(a);
+                size++;
+                max = a;
+            } else if (a > min && a < max) {
+                it = set.begin();
+                while (*it < a) {
+                    it++;
+                }
+                if (*it != a) {
+                    set.insert(it, a);
+                    size++;
+                }
+            }
+        }
     }
 
-    void remove(int index) {
-        if (index < 0 || index >= getSize()) {
-            cout << "Nothing remove" << endl;
+    void remove(int a) {
+        if (a < min || a > max) {
+            cout << "There are no this element!" << endl;
         } else {
-            int i = 0;
-            it = set.begin();
-            while (i <= index) {
-                if (i == index) {
-                    set.remove(*it);
+            if (a == min) {
+                it = set.begin();
+                set.remove(*it);
+                size--;
+                *it++;
+                min = *it;
+            } else if (a == max) {
+                it = set.end();
+                set.remove(*it);
+                size--;
+                *it--;
+                max = *it;
+            } else {
+                it = set.begin();
+                while (*it <= a) {
+                    if (*it == a) {
+                        set.remove(*it);
+                        size--;
+                    }
+                    it++;
                 }
-                it++;
-                i++;
             }
         }
     }
@@ -742,13 +781,20 @@ public:
     }
 
     int getSize() {
-        return set.size();
+        return size; //Мог бы поиспользовать set.size(), но это неоптимально
     }
 
     int getElement(int i) {
-        it = set.begin();
-        for (int k = 0; k < i; k++) {
-            ++it;
+        if (i <= size / 2) {
+            it = set.begin();
+            for (int k = 0; k < i; k++) {
+                ++it;
+            }
+        } else {
+            it = set.end();
+            for (int k = size; k > i; k--) {
+                --it;
+            }
         }
         return *it;
     }
@@ -940,13 +986,27 @@ public:
         if (a < min || a > max) {
             cout << "There are no this element!" << endl;
         } else {
-            it = set.begin();
-            while (*it <= a) {
-                if (*it == a) {
-                    set.remove(*it);
-                    size--;
+            if (a == min) {
+                it = set.begin();
+                set.remove(*it);
+                size--;
+                *it++;
+                min = *it;
+            } else if (a == max) {
+                it = set.end();
+                set.remove(*it);
+                size--;
+                *it--;
+                max = *it;
+            } else {
+                it = set.begin();
+                while (*it <= a) {
+                    if (*it == a) {
+                        set.remove(*it);
+                        size--;
+                    }
+                    it++;
                 }
-                it++;
             }
         }
     }
@@ -969,8 +1029,7 @@ public:
     }
 };
 
-template<typename T>
-void operator-(Set7Task<T> &left, Set7Task<T> &right) {
+template<typename T> void operator-(Set7Task<T> &left, Set7Task<T> &right) {
     int helpCalk = 0;
     int firstSize = left.getSize();
     int secSize = right.getSize();
@@ -990,8 +1049,7 @@ void operator-(Set7Task<T> &left, Set7Task<T> &right) {
     out.output();
 }
 
-template<typename T>
-void intersection7Task(Set7Task<T> &set1, Set7Task<T> &set2) {
+template<typename T> void intersection7Task(Set7Task<T> &set1, Set7Task<T> &set2) {
     Set7Task<T> intersection;
     for (int i = 0; i < set1.getSize(); i++) {
         for (int j = 0; j < set2.getSize(); j++) {
